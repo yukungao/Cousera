@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+    <head>
+      <title>JavaScript Color Guessing Game</title>
+    </head>
+
+    <body onload="start_game()">
+
+        <script>
+        var target_color;
+        var my_colors = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red","white"];
+        var guess_input_text;
+        var sucess = false;
+        var guesses = 0;
+
+        function start_game() {
+            var randome_color_index = Math.random() * my_colors.length;
+            var random_color = my_colors[Math.floor(randome_color_index)];
+            target_color = random_color;
+
+            alert("The random picked color is \n " + target_color);
+
+            while (!sucess) {
+                guess_input_text = prompt("I am thinking of one of these colors:"
+                                          + " \n \n" + my_colors.join(",")
+                                          + "\n \n What color am I thinkging of");
+                guesses += 1;
+                sucess = check_guess();
+
+            }
+
+            myBody=document.getElementsByTagName("body")[0];
+            myBody.style.background=target_color;
+
+            alert( "Congratulations! You have guessed the color !\n \n"
+                    + "It took you " + guesses+ "guesses to finish the game! \n \n"
+                    + "You can see the color in the background \n");
+
+        }
+
+        // For part 1, this function is not required to implement
+        function check_guess() {
+            // If the guess_input_text is not in the color arrays
+            if( my_colors.indexOf(guess_input_text) == -1) {
+
+              alert( "Sorry,I do not recognize that color! \n \n"
+                    + "Please try again \n");
+              return false;
+
+            } else if(guess_input_text > target_color) {
+
+              alert("Sorry, your is not correct! \n \n"
+                    + "Hint: Your color is alphabetically higher than mine! \n \n"
+                    + "Please try again \n");
+              return false;
+
+            } else if(guess_input_text < target_color) {
+
+              alert("Sorry, your is not correct! \n \n"
+                    + "Hint: Your color is alphabetically lower than mine! \n \n"
+                    + "Please try again \n");
+              return false;
+
+            }
+
+            return true;
+        }
+
+        </script>
+    </body>
+</html>
